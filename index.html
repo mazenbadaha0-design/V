@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        .minion-img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+        .question {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        #yesBtn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-weight: bold;
+            transform: scale(1);
+            z-index: 2;
+        }
+        #yesBtn:hover {
+            transform: scale(1.05);
+        }
+        #noBtn {
+            background: linear-gradient(45deg, #a8e6cf, #88d8a3);
+            color: #333;
+            font-weight: bold;
+        }
+        #noBtn:hover {
+            transform: translateX(10px);
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            transform: rotate(45deg);
+            animation: float 2s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(45deg); }
+            50% { transform: translateY(-10px) rotate(45deg); }
+        }
+        @media (max-width: 600px) {
+            .question { font-size: 24px; }
+            button { padding: 12px 24px; font-size: 18px; }
+            .minion-img { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="minion.jpg" alt="Minion Valentine" class="minion-img"> <!-- حمل الصورة وحط اسمها minion.jpg -->
+        <div class="question" id="question">بدك تكوني فالنتاين بتي؟ 💕</div>
+        <div class="buttons">
+            <button id="yesBtn">نعم ❤️</button>
+            <button id="noBtn">لا</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const question = document.getElementById('question');
+
+        let noClicks = 0;
+        const noTexts = [
+            'متأكدة؟ 😏',
+            'بس ليش؟ 💔',
+            'فكر تاني! 🤔',
+            'ما في غير نعم! 😍',
+            'هتندمي! 🔥',
+            'شوفي الزر الأحمر! 👇'
+        ];
+
+        noBtn.addEventListener('click', () => {
+            noClicks++;
+            if (noTexts[noClicks - 1]) {
+                noBtn.textContent = noTexts[noClicks - 1];
+            }
+            // تكبير زر نعم تدريجياً
+            const scale = 1 + (noClicks * 0.3);
+            yesBtn.style.transform = `scale(${scale})`;
+            yesBtn.style.fontSize = `${20 + noClicks * 4}px`;
+            yesBtn.style.padding = `${15 + noClicks * 3}px ${30 + noClicks * 6}px`;
+
+            // بعد 5 ضغطات، يكبر زر نعم ع الشاشة كلها
+            if (noClicks >= 5) {
+                yesBtn.style.position = 'fixed';
+                yesBtn.style.top = '50%';
+                yesBtn.style.left = '50%';
+                yesBtn.style.transform = 'scale(3) translate(-50%, -50%)';
+                yesBtn.style.zIndex = '9999';
+                noBtn.style.display = 'none';
+                question.style.display = 'none';
+                createHearts();
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            question.textContent = 'يلااا! أنا بحبك كتير ❤️❤️❤️';
+            question.style.fontSize = '40px';
+            question.style.color = '#ff1493';
+            noBtn.remove();
+            yesBtn.remove();
+            createHearts();
+            // ممكن تضيف ريديريكت أو فيديو هون
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>
