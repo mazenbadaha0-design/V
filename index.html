@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my Valentine? - Minion Edition</title>
+    <title>Minion Valentine - كوني فالنتاين بتي؟ 💕</title>
     <style>
         * {
             margin: 0;
@@ -33,31 +33,62 @@
             backdrop-filter: blur(10px);
         }
 
+        .minion-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
         .minion {
             width: 250px;
             height: auto;
-            margin-bottom: 20px;
-            position: relative;
-            cursor: pointer;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .minion:hover {
             transform: scale(1.05);
         }
 
-        /* نقطة خروج القلب من عيون الـMinion */
-        .minion::before {
-            content: '';
+        /* قلب يطلع من إيد الـMinion اليمين */
+        .minion-heart {
             position: absolute;
-            top: 35%; /* تقريباً موقع العيون */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1px;
-            height: 1px;
-            z-index: 5;
+            bottom: 15%;
+            right: 12%;
+            width: 35px;
+            height: 35px;
+            background: #ff4757;
+            clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
+            transform: scale(0);
+            opacity: 0;
+            z-index: 20;
+            pointer-events: none;
+            animation: heartEmerge 2s ease-out forwards;
+        }
+
+        /* الأنيميشن الرئيسي للقلب */
+        @keyframes heartEmerge {
+            0% {
+                transform: scale(0) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                transform: scale(1.4) translateY(-15px) rotate(15deg);
+                opacity: 1;
+            }
+            30% {
+                transform: scale(1.1) translateY(-40px) rotate(-10deg);
+            }
+            70% {
+                transform: scale(1) translateY(-100px) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) translateY(-200px) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         h1 {
@@ -65,6 +96,7 @@
             color: #e91e63;
             margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            direction: rtl;
         }
 
         .heart-big {
@@ -98,6 +130,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
+            direction: rtl;
         }
 
         #yesBtn {
@@ -116,7 +149,7 @@
         }
 
         #noBtn:hover {
-            transform: translate(20px, -10px);
+            transform: translate(-20px, -10px);
         }
 
         .hearts {
@@ -133,23 +166,18 @@
             position: absolute;
             font-size: 24px;
             color: #ff4081;
-            animation: heartPop 3s ease-out forwards;
+            animation: heartFloat 3s ease-out forwards;
             pointer-events: none;
         }
 
-        /* الأنيميشن الجديد: يطلع من الـMinion ويطير */
-        @keyframes heartPop {
+        @keyframes heartFloat {
             0% {
-                opacity: 0;
-                transform: scale(0) translateY(0) rotate(0deg);
-            }
-            10% {
                 opacity: 1;
-                transform: scale(1.2) translateY(-20px) rotate(180deg);
+                transform: translateY(0) rotate(0deg);
             }
             100% {
                 opacity: 0;
-                transform: scale(1) translateY(-100vh) rotate(720deg);
+                transform: translateY(-100vh) rotate(360deg);
             }
         }
 
@@ -171,30 +199,37 @@
             .container { padding: 40px 20px; margin: 20px; }
             .minion { width: 200px; }
             h1 { font-size: 2em; }
+            button { padding: 15px 30px; font-size: 1.1em; }
         }
     </style>
 </head>
 <body>
     <div class="hearts" id="hearts"></div>
     <div class="container">
-        <img src="minion.png" alt="Minion Valentine" class="minion" id="minion">
+        <div class="minion-container">
+            <div class="minion-heart" id="minionHeart"></div>
+            <img src="minion.png" alt="Minion Valentine" class="minion" id="minion">
+        </div>
+        
         <div id="proposal">
             <div class="heart-big">💖</div>
-            <h1>Will you be my Valentine?</h1>
+            <h1>بدك تكوني فالنتاين بتي؟</h1>
             <div class="buttons">
-                <button id="yesBtn">YES! 💕</button>
-                <button id="noBtn">No 😏</button>
+                <button id="yesBtn">نعم! 💕</button>
+                <button id="noBtn">لا 😏</button>
             </div>
         </div>
+        
         <div id="success" class="hidden">
             <div class="heart-big">💝</div>
-            <h1>YAYYY! 😍</h1>
-            <p style="font-size: 1.2em; color: #4caf50; margin-top: 20px;">I knew you couldn't resist! 💋</p>
+            <h1>يلاااا! 😍 أحبك!</h1>
+            <p style="font-size: 1.2em; color: #4caf50; margin-top: 20px;">كنت عارفة ما تقدري تقاومي! 💋</p>
         </div>
     </div>
 
     <script>
         const minion = document.getElementById('minion');
+        const minionHeart = document.getElementById('minionHeart');
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const proposal = document.getElementById('proposal');
@@ -203,16 +238,31 @@
 
         let heartInterval;
 
-        // أنيميشن قلب من الـMinion كل hover على No أو Minion
+        // أنيميشن القلب من إيد الـMinion
         function triggerMinionHeart() {
-            createMinionHeart();
+            minionHeart.style.display = 'block';
+            minionHeart.style.opacity = '1';
+            minionHeart.style.transform = 'scale(0)';
+            
+            // Reset وتشغيل الأنيميشن
+            minionHeart.style.animation = 'none';
+            requestAnimationFrame(() => {
+                minionHeart.style.animation = 'heartEmerge 2s ease-out forwards';
+            });
+            
+            setTimeout(() => {
+                minionHeart.style.display = 'none';
+                minionHeart.style.opacity = '0';
+            }, 2000);
         }
 
+        // تفاعل مع الـMinion والأزرار
         minion.addEventListener('mouseenter', triggerMinionHeart);
         minion.addEventListener('click', triggerMinionHeart);
         noBtn.addEventListener('mouseenter', triggerMinionHeart);
+        noBtn.addEventListener('click', triggerMinionHeart);
 
-        // No button dodging
+        // زر No بيهرب من الماوس
         noBtn.addEventListener('mouseenter', function(e) {
             const rect = this.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width * 100;
@@ -226,44 +276,50 @@
             this.style.transform = 'translate(0, 0)';
         });
 
-        // Mobile support
+        // دعم الموبايل
         noBtn.addEventListener('touchstart', function(e) {
             e.preventDefault();
             triggerMinionHeart();
-            // Dodging logic for touch...
         });
 
-        // Yes button
+        minion.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            triggerMinionHeart();
+        });
+
+        // زر Yes - الاحتفال!
         yesBtn.addEventListener('click', function() {
             proposal.classList.add('hidden');
             success.classList.remove('hidden');
             this.classList.add('success');
+            
+            // عاصفة قلوب
             heartInterval = setInterval(() => {
-                for (let i = 0; i < 5; i++) createHeart();
-            }, 200);
-            setTimeout(() => clearInterval(heartInterval), 5000);
+                for (let i = 0; i < 8; i++) {
+                    createHeart();
+                }
+            }, 150);
+            
+            setTimeout(() => clearInterval(heartInterval), 6000);
         });
-
-        function createMinionHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '💖';
-            heart.className = 'heart-float';
-            heart.style.left = '50%'; // من وسط الشاشة (عيون Minion)
-            heart.style.top = '40%';  // ارتفاع الـMinion
-            heart.style.fontSize = '30px';
-            heartsContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 3000);
-        }
 
         function createHeart() {
             const heart = document.createElement('div');
-            heart.innerHTML = ['💖', '💕', '💗', '💝'][Math.floor(Math.random() * 4)];
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '💘'][Math.floor(Math.random() * 5)];
             heart.className = 'heart-float';
             heart.style.left = Math.random() * 100 + '%';
             heart.style.top = Math.random() * 50 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
             heartsContainer.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
+
+        // قلوب تلقائية كل شوي للتأثير الحلو
+        setInterval(() => {
+            if (!success.classList.contains('hidden')) {
+                createHeart();
+            }
+        }, 1000);
     </script>
 </body>
 </html>
