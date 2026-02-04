@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minion Valentine - كوني فالنتاين بتي؟ 💕</title>
+    <title>هل تكونين حبيبتي في الفالنتاين؟ 💝</title>
     <style>
         * {
             margin: 0;
@@ -13,313 +13,295 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #ff9ff3, #feca57);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 60px 40px;
+            background: rgba(255,255,255,0.15);
+            padding: 50px 30px;
             border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: float 4s ease-in-out infinite;
             max-width: 500px;
-            position: relative;
-            backdrop-filter: blur(10px);
+            width: 90%;
         }
 
-        .minion-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(1deg); }
+            66% { transform: translateY(-5px) rotate(-1deg); }
         }
 
-        .minion {
-            width: 250px;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-            cursor: pointer;
+        .heart {
+            font-size: 100px;
+            margin-bottom: 25px;
+            display: block;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
         }
 
-        .minion:hover {
-            transform: scale(1.05);
-        }
-
-        /* قلب يطلع من إيد الـMinion اليمين */
-        .minion-heart {
-            position: absolute;
-            bottom: 15%;
-            right: 12%;
-            width: 35px;
-            height: 35px;
-            background: #ff4757;
-            clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
-            transform: scale(0);
-            opacity: 0;
-            z-index: 20;
-            pointer-events: none;
-            animation: heartEmerge 2s ease-out forwards;
-        }
-
-        /* الأنيميشن الرئيسي للقلب */
-        @keyframes heartEmerge {
-            0% {
-                transform: scale(0) translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                transform: scale(1.4) translateY(-15px) rotate(15deg);
-                opacity: 1;
-            }
-            30% {
-                transform: scale(1.1) translateY(-40px) rotate(-10deg);
-            }
-            70% {
-                transform: scale(1) translateY(-100px) rotate(180deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1) translateY(-200px) rotate(720deg);
-                opacity: 0;
-            }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) rotate(-2deg); }
+            14% { transform: scale(1.3) rotate(0deg); }
+            28% { transform: scale(1) rotate(2deg); }
+            42% { transform: scale(1.3) rotate(0deg); }
+            70% { transform: scale(1) rotate(0deg); }
         }
 
         h1 {
-            font-size: 2.5em;
-            color: #e91e63;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            direction: rtl;
-        }
-
-        .heart-big {
-            font-size: 3em;
-            color: #ff4081;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            color: white;
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 35px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            line-height: 1.3;
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        button {
-            padding: 18px 40px;
-            font-size: 1.3em;
-            font-weight: bold;
+        .btn {
+            padding: 18px 35px;
+            font-size: clamp(16px, 4vw, 20px);
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
-            direction: rtl;
         }
 
-        #yesBtn {
-            background: linear-gradient(45deg, #ff6b9d, #e91e63);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .yes-btn {
+            background: linear-gradient(45deg, #ff6b9d, #ff8e8e, #ff6b9d);
             color: white;
+            box-shadow: 0 15px 30px rgba(255,107,157,0.4);
         }
 
-        #yesBtn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.4);
+        .yes-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 25px 50px rgba(255,107,157,0.6);
         }
 
-        #noBtn {
-            background: linear-gradient(45deg, #757575, #424242);
+        .no-btn {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe, #fd79a8);
             color: white;
+            box-shadow: 0 15px 30px rgba(108,92,231,0.4);
         }
 
-        #noBtn:hover {
-            transform: translate(-20px, -10px);
+        .no-btn.moving {
+            position: fixed !important;
+            z-index: 1000;
+            transform: scale(1.1) !important;
+            transition: all 0.3s ease-out;
         }
 
-        .hearts {
+        .yes-screen {
+            display: none;
+            animation: celebrate 1s ease-out;
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(0.3) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(0deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .celebration-hearts {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            z-index: 100;
+            z-index: 2000;
         }
 
-        .heart-float {
+        .heart-particle {
             position: absolute;
-            font-size: 24px;
-            color: #ff4081;
-            animation: heartFloat 3s ease-out forwards;
+            font-size: 20px;
             pointer-events: none;
+            animation: floatAway 3s ease-out forwards;
         }
 
-        @keyframes heartFloat {
+        @keyframes floatAway {
             0% {
+                transform: translateY(0) translateX(0) scale(1);
                 opacity: 1;
-                transform: translateY(0) rotate(0deg);
             }
             100% {
+                transform: translateY(-100vh) translateX(50vw) scale(0);
                 opacity: 0;
-                transform: translateY(-100vh) rotate(360deg);
             }
         }
 
-        .success {
-            background: linear-gradient(45deg, #4caf50, #8bc34a) !important;
-            animation: bounce 0.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 40px 20px; margin: 20px; }
-            .minion { width: 200px; }
-            h1 { font-size: 2em; }
-            button { padding: 15px 30px; font-size: 1.1em; }
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; }
+            .buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 250px; }
         }
     </style>
 </head>
 <body>
-    <div class="hearts" id="hearts"></div>
-    <div class="container">
-        <div class="minion-container">
-            <div class="minion-heart" id="minionHeart"></div>
-            <img src="minion.png" alt="Minion Valentine" class="minion" id="minion">
-        </div>
-        
-        <div id="proposal">
-            <div class="heart-big">💖</div>
-            <h1>بدك تكوني فالنتاين بتي؟</h1>
-            <div class="buttons">
-                <button id="yesBtn">نعم! 💕</button>
-                <button id="noBtn">لا 😏</button>
-            </div>
-        </div>
-        
-        <div id="success" class="hidden">
-            <div class="heart-big">💝</div>
-            <h1>يلاااا! 😍 أحبك!</h1>
-            <p style="font-size: 1.2em; color: #4caf50; margin-top: 20px;">كنت عارفة ما تقدري تقاومي! 💋</p>
+    <div class="container" id="container">
+        <div class="heart">💖</div>
+        <h1>هل تكونين حبيبتي في الفالنتاين؟</h1>
+        <div class="buttons">
+            <button class="btn yes-btn" id="yesBtn">نعم 💕</button>
+            <button class="btn no-btn" id="noBtn">لا</button>
         </div>
     </div>
 
     <script>
-        const minion = document.getElementById('minion');
-        const minionHeart = document.getElementById('minionHeart');
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const proposal = document.getElementById('proposal');
-        const success = document.getElementById('success');
-        const heartsContainer = document.getElementById('hearts');
+        const container = document.getElementById('container');
 
-        let heartInterval;
+        const noTexts = [
+            'متأكدة؟ 😢',
+            'بس أنا بحبك 💔',
+            'الفالنتاين من غيرك ممل 😭',
+            'فكّري تاني يا قلبي 🤔',
+            'أنتِ الوحيدة في قلبي 💖',
+            '😍 بس قولي نعم',
+            '💝 أرجوكِ',
+            'ما أقدرش أعيش من غيرك ❤️'
+        ];
 
-        // أنيميشن القلب من إيد الـMinion
-        function triggerMinionHeart() {
-            minionHeart.style.display = 'block';
-            minionHeart.style.opacity = '1';
-            minionHeart.style.transform = 'scale(0)';
+        let noClickCount = 0;
+
+        noBtn.addEventListener('click', function(e) {
+            noClickCount++;
             
-            // Reset وتشغيل الأنيميشن
-            minionHeart.style.animation = 'none';
-            requestAnimationFrame(() => {
-                minionHeart.style.animation = 'heartEmerge 2s ease-out forwards';
-            });
-            
-            setTimeout(() => {
-                minionHeart.style.display = 'none';
-                minionHeart.style.opacity = '0';
-            }, 2000);
-        }
-
-        // تفاعل مع الـMinion والأزرار
-        minion.addEventListener('mouseenter', triggerMinionHeart);
-        minion.addEventListener('click', triggerMinionHeart);
-        noBtn.addEventListener('mouseenter', triggerMinionHeart);
-        noBtn.addEventListener('click', triggerMinionHeart);
-
-        // زر No بيهرب من الماوس
-        noBtn.addEventListener('mouseenter', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width * 100;
-            const y = (e.clientY - rect.top) / rect.height * 100;
-            const moveX = (x > 50 ? -30 : 30);
-            const moveY = (y > 50 ? -20 : 20);
-            this.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-
-        noBtn.addEventListener('mouseleave', function() {
-            this.style.transform = 'translate(0, 0)';
-        });
-
-        // دعم الموبايل
-        noBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            triggerMinionHeart();
-        });
-
-        minion.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            triggerMinionHeart();
-        });
-
-        // زر Yes - الاحتفال!
-        yesBtn.addEventListener('click', function() {
-            proposal.classList.add('hidden');
-            success.classList.remove('hidden');
-            this.classList.add('success');
-            
-            // عاصفة قلوب
-            heartInterval = setInterval(() => {
-                for (let i = 0; i < 8; i++) {
-                    createHeart();
-                }
-            }, 150);
-            
-            setTimeout(() => clearInterval(heartInterval), 6000);
-        });
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = ['💖', '💕', '💗', '💝', '💘'][Math.floor(Math.random() * 5)];
-            heart.className = 'heart-float';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.top = Math.random() * 50 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            heartsContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
-
-        // قلوب تلقائية كل شوي للتأثير الحلو
-        setInterval(() => {
-            if (!success.classList.contains('hidden')) {
-                createHeart();
+            if (noClickCount < noTexts.length) {
+                noBtn.textContent = noTexts[noClickCount];
+                noBtn.classList.add('moving');
+                
+                // حركة عشوائية للزر "لا"
+                const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+                const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+                
+                // تكبير زر "نعم"
+                yesBtn.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    yesBtn.style.transform = 'scale(1)';
+                }, 300);
             }
-        }, 1000);
+        });
+
+        yesBtn.addEventListener('click', function() {
+            container.innerHTML = `
+                <div class="yes-screen">
+                    <div class="heart" style="font-size: 150px; margin-bottom: 20px;">💝</div>
+                    <h1 style="font-size: 3em; color: #ff6b9d; margin-bottom: 20px;">يلااااااااااا 🎉🎉</h1>
+                    <p style="color: white; font-size: 24px; margin: 30px 0; font-weight: bold;">أحبك أكتر من الكون كله! 🥰🥰</p>
+                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <span class="heart" style="font-size: 60px;">💖</span>
+                        <span class="heart" style="font-size: 60px;">💕</span>
+                        <span class="heart" style="font-size: 60px;">💝</span>
+                        <span class="heart" style="font-size: 60px;">🌸</span>
+                    </div>
+                </div>
+            `;
+            createHeartExplosion();
+        });
+
+        function createHeartExplosion() {
+            const hearts = ['💖', '💕', '💝', '🌸', '✨', '🌟', '💫'];
+            
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = Math.random() * 100 + 'vh';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    heart.style.animationDelay = Math.random() * 0.5 + 's';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+        }
+
+        // تأثير كونفيتي مستمر في الخلفية
+        function createBackgroundConfetti() {
+            setInterval(() => {
+                if (Math.random() < 0.3) {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = ['✨', '🌟'][Math.floor(Math.random() * 2)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-20px';
+                    confetti.style.fontSize = '20px';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '-1';
+                    confetti.style.animation = 'fall 4s linear forwards';
+                    
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }
+            }, 800);
+        }
+
+        // إضافة الـ CSS للكونفيتي
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // تشغيل الكونفيتي في الخلفية
+        createBackgroundConfetti();
     </script>
 </body>
 </html>
